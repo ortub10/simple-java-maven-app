@@ -22,7 +22,7 @@ jobs:
 
       - name: Increase version
         run: |
-          VERSION=$(mvn help:evaluate -Dexpression=project.version -q)
+          VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
           echo "Current version: ${VERSION}"
           PATCH=$(echo $VERSION | cut -d '.' -f 3 | cut -d '-' -f 1)
           echo "Current patch version: ${PATCH}"
