@@ -18,9 +18,6 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-          
-
-    
 
 
       - name: Increase version
@@ -35,13 +32,13 @@ jobs:
       
       - name: Commit updated pom.xml
         run: |
-         git config --local user.name "GitHub Actions"
-         git config --local user.email "actions@github.com"
-         git add pom.xml
-         git commit -m "Update pom.xml version"
-         git push
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          git config --local user.name "GitHub Actions"
+          git config --local user.email "actions@github.com"
+          git add pom.xml
+          git commit -m "Update pom.xml version"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
       - name: Login to Docker registry
         uses: docker/login-action@v3
