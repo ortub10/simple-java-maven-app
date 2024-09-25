@@ -40,6 +40,7 @@ jobs:
           git config --local user.email "actions@github.com"
           git add pom.xml
           git commit -m "Update pom.xml version"
+          git pull origin master --rebase
           git push origin HEAD:master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
