@@ -23,7 +23,9 @@ jobs:
       - name: Increase version
         run: |
           VERSION=$(mvn help:evaluate -Dexpression=project.version -q)
+          echo "Current version: $VERSION"
           PATCH=$(echo $VERSION | cut -d '.' -f 3 | cut -d '-' -f 1)
+          echo "Current patch version: $PATCH"
           INCREASED_VERSION=1.0.$((PATCH + 1))-SNAPSHOT
           echo "Changing version to: ${INCREASED_VERSION}"
           mvn versions:set -DnewVersion=${INCREASED_VERSION}
