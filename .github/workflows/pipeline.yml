@@ -34,16 +34,6 @@ jobs:
           mvn versions:commit 
           cat pom.xml
       
-      - name: Commit updated pom.xml
-        run: |
-          git config --local user.name "GitHub Actions"
-          git config --local user.email "actions@github.com"
-          git add pom.xml
-          git commit -m "Update pom.xml version"
-          git pull origin master --rebase
-          git push origin HEAD:master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
       - name: Login to Docker registry
         uses: docker/login-action@v3
@@ -59,3 +49,14 @@ jobs:
           tags: |
             orgitlab/hello:${{ github.sha }}
             orgitlab/hello:latest
+            
+      - name: Commit updated pom.xml
+        run: |
+          git config --local user.name "GitHub Actions"
+          git config --local user.email "actions@github.com"
+          git add pom.xml
+          git commit -m "Update pom.xml version"
+          git pull origin master --rebase
+          git push origin HEAD:master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}      
