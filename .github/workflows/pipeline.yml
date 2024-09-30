@@ -87,7 +87,6 @@ jobs:
         run: |
           wget https://github.com/sigstore/cosign/releases/latest/download/cosign-linux-amd64 -O /usr/local/bin/cosign
           chmod +x /usr/local/bin/cosign
-          cosign sign --help
          
 
       - name: Create keys for Cosign
@@ -98,7 +97,7 @@ jobs:
 
       - name: Sign Docker Image
         run: |
-          cosign sign --key cosign.key --no-prompt orgitlab/hello:${{ github.sha }}
+          cosign sign --key cosign.key -y orgitlab/hello:${{ github.sha }}
 
       - name: Verify Docker Image
         run: |
