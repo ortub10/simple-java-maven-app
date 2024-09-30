@@ -39,7 +39,7 @@ jobs:
       - name: Run OWASP Dependency-Check
         run: |
           cd /opt/dependency-check-install
-          ./bin/dependency-check.sh --project "simple" --format ALL --failOnVulnerabilities true --failOnCVSS 9
+          ./bin/dependency-check.sh --project "simple" --format ALL  --failOnCVSS 9
         
       
       - name: Increase version
