@@ -91,7 +91,7 @@ jobs:
       - name: Create keys Cosign
         run: |
           cosign generate-key-pair
-          cat private.key | gh secret set COSIGN_KEY
+          cat cosign.key | gh secret set COSIGN_KEY
           
       - name: sign
         run: |
