@@ -40,7 +40,10 @@ jobs:
         run: |
           /opt/dependency-check-install/bin/dependency-check.sh --project "simple" --format ALL --failOnCVSS 9
           
-      
+      - name: Scan Dockerfile
+        uses: hadolint/hadolint-action@v3.1.0
+        with:
+          dockerfile: Dockerfile
       
       - name: Increase version
         run: |
