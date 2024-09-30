@@ -20,6 +20,6 @@ repos:
           - --format
           - ALL
           - --failOnVulnerabilities
-          - true
+          - 'true'
           - --failOnCVSS
           - '9'
