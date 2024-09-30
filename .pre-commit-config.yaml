@@ -9,19 +9,4 @@ repos:
     rev: v1.0.3
     hooks:
       - id: detect-secrets
-   
-  - repo: local
-    hooks:
-      - id: dependency-check
-        name: Run OWASP Dependency-Check
-        entry: dependency-check
-        args:
-          - --project
-          - simple
-          - --format
-          - ALL
-          - --failOnVulnerabilities
-          - 'true'
-          - --failOnCVSS
-          - '9'
-        language: system  
+  

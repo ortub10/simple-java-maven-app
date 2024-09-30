@@ -28,6 +28,17 @@ jobs:
       - name: Run Pre-commit
         run: |
           pre-commit run --all-files
+          
+      - name: Install OWASP Dependency-Check
+        run: |
+          wget https://github.com/jeremylong/DependencyCheck/releases/download/v10.0.4/dependency-check.sh
+          chmod +x dependency-check.sh
+          sudo mv dependency-check.sh /usr/local/bin/dependency-check
+          
+      - name: Run OWASP Dependency-Check
+        run: |
+          dependency-check --project "YourProjectName" --format ALL --failOnVulnerabilities true --failOnCVSS 9
+        
       
       - name: Increase version
         run: |
