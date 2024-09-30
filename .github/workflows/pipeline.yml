@@ -31,7 +31,8 @@ jobs:
           pre-commit run --all-files
           
       - name: Depcheck
-        uses: dependency-check/Dependency-Check_Action@v2
+        uses: dependency-check/Dependency-Check_Action@main
+
         id: Depcheck
         with:
           project: 'test'
