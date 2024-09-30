@@ -80,7 +80,9 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          image: orgitlab/hello:${{ github.sha }}     
+          image: orgitlab/hello:${{ github.sha }}
+          args: --severity-threshold=high
+     
             
       - name: Commit updated pom.xml
         run: |
