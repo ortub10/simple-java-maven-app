@@ -93,19 +93,15 @@ jobs:
       
         run: |
           cosign generate-key-pair
-          echo "cosign_key=$(cat cosign.key)" >> $GITHUB_ENV
-          echo "cosign_pub_key=$(cat cosign.pub)" >> $GITHUB_ENV
           
 
       - name: Sign Docker Image
         run: |
-          echo "${{ env.cosign_key }}" > temp_cosign.key
-          cosign sign --key temp_cosign.key orgitlab/hello:${{ github.sha }}
+          cosign sign --key cosign.key orgitlab/hello:${{ github.sha }}
 
       - name: Verify Docker Image
         run: |
-          echo "${{ env.cosign_pub_key }}" > temp_cosign.pub
-          cosign verify --key temp_cosign.pub orgitlab/hello:${{ github.sha }}
+          cosign sign --key cosign.pub orgitlab/hello:${{ github.sha }}
             
       - name: Commit updated pom.xml
         run: |
