@@ -93,7 +93,8 @@ jobs:
         run: |
           echo "Checking existing secrets..."
           gh secret list
-
+        env:
+          GH_TOKEN: ${{ github.token }}
 
 
       - name: Sign Docker Image
