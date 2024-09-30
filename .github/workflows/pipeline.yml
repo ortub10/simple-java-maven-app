@@ -21,7 +21,14 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
+      - name: Install Pre-commit
+        run: |
+          pip install pre-commit
 
+      - name: Run Pre-commit (Secret Scanning)
+        run: |
+          pre-commit run --all-files
+      
       - name: Increase version
         run: |
           VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
