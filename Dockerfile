@@ -15,3 +15,5 @@ WORKDIR /app
 COPY --from=build /app/target/*.jar my-app.jar
 ENTRYPOINT ["java", "-jar", "my-app.jar"]
 COPY --from=build /app/target/*.jar /app/
+USER root
+ADD http://example.com/somefile /app/
