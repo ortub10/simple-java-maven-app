@@ -87,6 +87,10 @@ jobs:
         run: |
           wget https://github.com/sigstore/cosign/releases/latest/download/cosign-linux-amd64 -O /usr/local/bin/cosign
           chmod +x /usr/local/bin/cosign
+          
+      - name: Verify GH CLI Installation
+        run: |
+          gh --version    
 
       - name: Create keys for Cosign
         run: |
