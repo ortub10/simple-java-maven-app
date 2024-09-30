@@ -8,11 +8,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      actions: write
-      secrets: write
-
+    
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -97,15 +93,8 @@ jobs:
       
         run: |
           cosign generate-key-pair
-          cat cosign.key | gh secret set COSIGN_KEY
-          cat cosign.pub | gh secret set COSIGN_PUB_KEY
-          gh api \
-            -H "Accept: application/vnd.github+json" \
-            -H "X-GitHub-Api-Version: 2022-11-28" \
-            /repos/ortub10/simple-java-maven-app/actions/secrets/public-key
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
+          cat cosign.key 
+          cat cosign.pub 
 
 
       - name: Sign Docker Image
