@@ -101,7 +101,7 @@ jobs:
 
       - name: Verify Docker Image
         run: |
-          cosign sign --key cosign.pub orgitlab/hello:${{ github.sha }}
+          cosign verify --key cosign.pub orgitlab/hello:${{ github.sha }}
             
       - name: Commit updated pom.xml
         run: |
