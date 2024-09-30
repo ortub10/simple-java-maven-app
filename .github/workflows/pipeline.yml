@@ -90,17 +90,32 @@ jobs:
          
 
       - name: Create keys for Cosign
-      
         run: |
+          echo "Generating keys..."
           cosign generate-key-pair
-          cat cosign.key | gh secret set COSIGN_KEY
-          cat cosign.pub | gh secret set COSIGN_PUB_KEY
+          echo "Keys generated."
+          if [ -f cosign.key ]; then
+            echo "Private key exists."
+            cat cosign.key | gh secret set COSIGN_KEY
+          else
+            echo "Private key does not exist."
+            exit 1
+          fi
+          if [ -f cosign.pub ]; then
+            echo "Public key exists."
+            cat cosign.pub | gh secret set COSIGN_PUB_KEY
+          else
+            echo "Public key does not exist."
+            exit 1
+          fi
+          echo "Fetching public key..."
           gh api \
-            -H "Accept: application/vnd.github+json" \
-            -H "X-GitHub-Api-Version: 2022-11-28" \
-            /repos/ortub10/simple-java-maven-app/actions/secrets/public-key
+          -H "Accept: application/vnd.github+json" \
+          -H "X-GitHub-Api-Version: 2022-11-28" \
+          /repos/ortub10/simple-java-maven-app/actions/secrets/public-key
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 
 
 
