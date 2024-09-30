@@ -20,6 +20,8 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
+      - name: Check JAVA_HOME
+        run: echo $JAVA_HOME    
 
       - name: Install Pre-commit
         run: |
