@@ -83,6 +83,21 @@ jobs:
           image: orgitlab/hello:${{ github.sha }}
           args: --severity-threshold=high
      
+      - name: Install Cosign
+        run: |
+          wget https://github.com/sigstore/cosign/releases/latest/download/cosign-linux-amd64 -O /usr/local/bin/cosign
+          chmod +x /usr/local/bin/cosign
+          
+      - name: Create keys Cosign
+        run: |
+          cosign generate-key-pair
+          cat private.key | gh secret set COSIGN_KEY --body
+          
+      - name: sign
+        run: |
+          cosign sign --key ${{ secrets.COSIGN_KEY }} orgitlab/hello:${{ github.sha }}     
+          
+
             
       - name: Commit updated pom.xml
         run: |
