@@ -45,6 +45,7 @@ jobs:
         with:
           dockerfile: Dockerfile
           verbose: true
+          
       
       - name: Increase version
         run: |
@@ -73,6 +74,13 @@ jobs:
           tags: |
             orgitlab/hello:${{ github.sha }}
             orgitlab/hello:latest
+            
+      - name: Run Snyk to check Docker image for vulnerabilities
+        uses: snyk/actions/docker@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          image: orgitlab/hello:${{ github.sha }}     
             
       - name: Commit updated pom.xml
         run: |
