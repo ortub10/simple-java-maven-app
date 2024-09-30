@@ -93,6 +93,9 @@ jobs:
           cosign generate-key-pair
           cat cosign.key | gh secret set COSIGN_KEY
           
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}    
+          
       - name: sign
         run: |
           cosign sign --key ${{ secrets.COSIGN_KEY }} orgitlab/hello:${{ github.sha }}     
