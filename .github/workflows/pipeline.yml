@@ -33,12 +33,13 @@ jobs:
         run: |
           wget https://github.com/jeremylong/DependencyCheck/releases/download/v10.0.4/dependency-check-10.0.4-release.zip
           unzip dependency-check-10.0.4-release.zip -d /opt/
-          sudo mv /opt/dependency-check/bin/dependency-check.sh /usr/local/bin/dependency-check
-          chmod +x /usr/local/bin/dependency-check
+          sudo mv /opt/dependency-check /opt/dependency-check-install
+          export PATH=$PATH:/opt/dependency-check-install/bin
           
       - name: Run OWASP Dependency-Check
         run: |
-          dependency-check --project "YourProjectName" --format ALL --failOnVulnerabilities true --failOnCVSS 9
+          cd /opt/dependency-check-install
+          ./bin/dependency-check.sh --project "simple" --format ALL --failOnVulnerabilities true --failOnCVSS 9
         
       
       - name: Increase version
