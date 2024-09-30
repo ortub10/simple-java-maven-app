@@ -97,7 +97,7 @@ jobs:
 
       - name: Sign Docker Image
         run: |
-          cosign sign --key cosign.key orgitlab/hello:${{ github.sha }}
+          cosign sign --key cosign.key --no-prompt orgitlab/hello:${{ github.sha }}
 
       - name: Verify Docker Image
         run: |
