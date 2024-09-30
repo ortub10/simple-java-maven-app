@@ -20,8 +20,7 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-      - name: Check JAVA_HOME
-        run: echo $JAVA_HOME    
+          
 
       - name: Install Pre-commit
         run: |
@@ -32,7 +31,7 @@ jobs:
           pre-commit run --all-files
           
       - name: Depcheck
-        uses: dependency-check/Dependency-Check_Action@main
+        uses: dependency-check/Dependency-Check_Action@v1.1.1
         id: Depcheck
         with:
           project: 'test'
