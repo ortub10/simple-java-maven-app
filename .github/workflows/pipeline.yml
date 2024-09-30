@@ -93,17 +93,21 @@ jobs:
       
         run: |
           cosign generate-key-pair
-          cat cosign.key 
-          cat cosign.pub 
-
+          COSIGN_KEY_CONTENT=$(cat cosign.key)
+          echo "::set-output name=cosign_key::${COSIGN_KEY_CONTENT}" 
+          COSIGN_PUB_KEY_CONTENT=$(cat cosign.pub) 
+          echo "::set-output name=cosign_pub_key::${COSIGN_PUB_KEY_CONTENT}"
+          
 
       - name: Sign Docker Image
         run: |
-          cosign sign --key ${{ secrets.COSIGN_KEY }} orgitlab/hello:${{ github.sha }}
+          echo "${{ steps.create_keys.outputs.cosign_key }}" > temp_cosign.key
+          cosign sign --key temp_cosign.key orgitlab/hello:${{ github.sha }}
 
       - name: Verify Docker Image
         run: |
-          cosign verify --key ${{ secrets.COSIGN_PUB_KEY }} orgitlab/hello:${{ github.sha }}
+          echo "${{ steps.create_keys.outputs.cosign_pub_key }}" > temp_cosign.pub
+          cosign verify --key temp_cosign.pub orgitlab/hello:${{ github.sha }}
             
       - name: Commit updated pom.xml
         run: |
