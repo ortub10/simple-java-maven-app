@@ -24,3 +24,4 @@ repos:
           - 'true'
           - --failOnCVSS
           - '9'
+        language: system  
