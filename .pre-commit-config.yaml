@@ -10,3 +10,16 @@ repos:
     hooks:
       - id: detect-secrets
    
+  - repo: https://github.com/jeremylong/DependencyCheck.git
+    rev: v10.0.4
+    hooks:
+      - id: dependency-check
+        args:
+          - --project
+          - simple
+          - --format
+          - ALL
+          - --failOnVulnerabilities
+          - true
+          - --failOnCVSS
+          - '9'
