@@ -30,14 +30,15 @@ jobs:
         run: |
           pre-commit run --all-files
           
-      
-      - name: Scan for vulnerabilities in dependencies
-        uses: snyk/actions/maven@master
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        with:
-          args: --all-projects --fail-on=all --severity-threshold=critical
-      
+      - name: Install OWASP Dependency-Check
+        run: |
+          wget https://github.com/jeremylong/DependencyCheck/releases/download/v10.0.4/dependency-check-10.0.4-release.zip
+          unzip dependency-check-10.0.4-release.zip -d /opt/
+          mv /opt/dependency-check /opt/dependency-check-install
+
+      - name: Run OWASP Dependency-Check
+        run: |
+          /opt/dependency-check-install/bin/dependency-check.sh --project "simple" --scan . --format ALL --failOnCVSS 9
           
       - name: Scan Dockerfile
         uses: hadolint/hadolint-action@v3.1.0
