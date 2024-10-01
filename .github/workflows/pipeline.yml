@@ -30,12 +30,14 @@ jobs:
         run: |
           pre-commit run --all-files
           
-      - name: Run Snyk to check for vulnerabilities
-        uses: snyk/actions/java@master  
+      
+      - name: Scan for vulnerabilities in dependencies
+        uses: snyk/actions/maven@master
         env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}  
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          args: --severity-threshold=critical 
+          args: --all-projects --fail-on=all --severity-threshold=critical
+      
           
       - name: Scan Dockerfile
         uses: hadolint/hadolint-action@v3.1.0
