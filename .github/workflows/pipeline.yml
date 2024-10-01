@@ -38,7 +38,7 @@ jobs:
 
       - name: Run OWASP Dependency-Check
         run: |
-          /opt/dependency-check-install/bin/dependency-check.sh --project "simple" --format ALL --failOnCVSS 9 --log ./dependency-check.log
+          /opt/dependency-check-install/bin/dependency-check.sh --project "simple" --format ALL --failOnCVSS 9 --log ./dependency-check.log --verbose
           cat ./dependency-check.log
           
       - name: Scan Dockerfile
