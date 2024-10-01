@@ -102,7 +102,7 @@ jobs:
       
       - name: Verify Docker Image
         run: |
-          cosign verify --key env://COSIGN_KEY_PUB ${digest}
+          cosign verify --key env://COSIGN_KEY_PUB orgitlab/hello:${{ github.sha }}
        
         env:
           COSIGN_KEY_PUB: ${{secrets.COSIGN_KEY_PUB}}      
