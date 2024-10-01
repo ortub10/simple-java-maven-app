@@ -96,6 +96,13 @@ jobs:
           COSIGN_KEY: ${{secrets.COSIGN_KEY}}
           COSIGN_PASSWORD: ${{secrets.COSIGN_PASSWORD}}   
          
+      
+      - name: Check images
+        run: |
+          cosign verify --key env://COSIGN_KEY_PUB orgitlab/hello:${{ github.sha }}
+       
+        env:
+          COSIGN_KEY_PUB: ${{secrets.COSIGN_KEY_PUB}}      
 
       #- name: Create keys for Cosign
       #
