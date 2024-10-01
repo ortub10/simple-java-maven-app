@@ -91,9 +91,8 @@ jobs:
           
       - name: sign container image
         run: |
-                
-            digest=$(docker inspect --format='{{index .RepoDigests 0}}' orgitlab/hello:${{ github.sha }})
-            cosign sign --key env://COSIGN_KEY -y orgitlab/hello@sha256:${digest}
+          digest=$(docker inspect --format='{{index .RepoDigests 0}}' orgitlab/hello:${{ github.sha }})
+          cosign sign --key env://COSIGN_KEY -y orgitlab/hello@sha256:${digest}
 
 
         env:
