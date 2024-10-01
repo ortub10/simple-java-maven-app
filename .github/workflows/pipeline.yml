@@ -35,7 +35,7 @@ jobs:
         run: |
           npm install -g snyk
 
-      - name: Run Snyk to check for vulnerabilities
+      - name: Dependency scan
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         run: |
