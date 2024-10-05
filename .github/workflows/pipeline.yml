@@ -55,7 +55,7 @@ jobs:
           unzip sonar-scanner.zip
           export PATH=$PATH:$PWD/sonar-scanner-4.6.2.2472-linux/bin
           
-          sonar-scanner \
+          sonar-scanner -X \
             -Dsonar.projectKey=github-action
             -Dsonar.sources=src
             -Dsonar.host.url=http://3.76.28.12:9000
