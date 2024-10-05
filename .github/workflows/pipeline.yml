@@ -58,6 +58,7 @@ jobs:
           sonar-scanner -X \
             -Dsonar.projectKey=github-action \
             -Dsonar.sources=src \
+            -Dsonar.java.binaries=.
             -Dsonar.host.url=http://3.76.28.12:9000 \
             -Dsonar.login=${SONAR_TOKEN}
    
